@@ -5,11 +5,8 @@ from datetime import datetime
 import random
 # Pustaka Pillow untuk memproses gambar
 from PIL import Image
-
-# 1. Konfigurasi Halaman Utama
 st.set_page_config(layout="wide", page_title="Dashboard Monitoring Nasional")
 
-# 2. Tambahkan CSS untuk styling agar tampilan lebih modern
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
@@ -50,9 +47,6 @@ st.markdown("""
     footer {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
-
-# --- DATA PREPARATION ---
-# Mendefinisikan dataframe sebelum dipanggil di bawah
 df = pd.DataFrame([
     {"Wilayah": "DKI Jakarta", "Target": 150000, "Realisasi": 85.2, "Status": "Optimal"},
     {"Wilayah": "Jawa Barat", "Target": 220000, "Realisasi": 78.9, "Status": "Waspada"},
@@ -61,7 +55,6 @@ df = pd.DataFrame([
     {"Wilayah": "Bengkulu", "Target": 95000, "Realisasi": 91.0, "Status": "Optimal"},
 ])
 
-# --- HEADER: LOGO & JUDUL ---
 col_logo1, col_logo2, col_logo3, col_title = st.columns([0.5, 0.5, 0.5, 5], vertical_alignment="center")
 
 with col_logo1:
@@ -84,8 +77,6 @@ with col_title:
     """, unsafe_allow_html=True)
 
 st.markdown("<hr>", unsafe_allow_html=True)
-
-# --- 2. LOGIKA & DATABASE SIMULASI (Data Asli Anda) ---
 KOMODITAS_MBG = {
     "Beras": {"kategori": "Karbohidrat", "ref": 12500},
     "Telur Ayam Ras": {"kategori": "Protein Hewani", "ref": 26000},
@@ -112,7 +103,6 @@ def draw_card(label, value, delta, status="A++", is_crit=False):
     d_class = "delta-down" if is_crit else "delta-up"
     st.markdown(f"""<div class="custom-card"><div class="{badge}">{status}</div><div class="card-label">{label}</div><div class="card-value">{value}</div><div class="card-delta {d_class}">{delta}</div></div>""", unsafe_allow_html=True)
 
-# --- 3. SIDEBAR NAVIGATION ---
 with st.sidebar:
     st.markdown('<p class="nav-title">MBG SENTRA</p>', unsafe_allow_html=True)
     st.markdown('<p class="nav-subtitle">DIGITAL SOVEREIGNTY</p>', unsafe_allow_html=True)
@@ -124,11 +114,9 @@ with st.sidebar:
     ])
     
     st.divider()
-    st.subheader("🤖 AgriGuard Assistant")
+    st.subheader("🤖 MBG Sentra Assistant")
     st.info("Harga stabil dalam 7 hari terakhir. Terdapat kenaikan tidak wajar pada Supplier Vendor Luar X.")
     st.caption("Nutritional insight: Menjamin ketersediaan pangan sehat merata.")
-
-# --- 4. IMPLEMENTASI MENU (Lengkap Tanpa Kurang) ---
 
 def draw_card(title, value, delta, status="A++", is_crit=False):
     # Logika warna
@@ -137,8 +125,6 @@ def draw_card(title, value, delta, status="A++", is_crit=False):
     badge_bg = "#EF4444" if is_crit else "#DCFCE7"
     badge_text = "#FFFFFF" if is_crit else "#15803D"
     delta_color = "#B91C1C" if is_crit else "#15803D"
-    
-    # HTML Card dengan Inline CSS (Lebih Aman)
     st.markdown(f"""
         <div style="
             background-color: {bg_color};
@@ -170,7 +156,6 @@ def draw_card(title, value, delta, status="A++", is_crit=False):
     """, unsafe_allow_html=True)
 
 if menu == "Dashboard Utama":
-    # 1. Judul Halaman
     st.markdown("## 📊 Dashboard Monitoring Nasional")
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("Total Anggaran", "Rp 12.5 T", "4.2%")
@@ -181,7 +166,6 @@ if menu == "Dashboard Utama":
     st.markdown("<br>", unsafe_allow_html=True)
     st.divider()
 
-    # 3. Custom Cards (Menggunakan fungsi draw_card kamu)
     st.markdown("### 🛡️ Status Operasional")
     c1, c2, c3, c4 = st.columns(4)
     with c1: 
@@ -195,7 +179,6 @@ if menu == "Dashboard Utama":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 4. Visualisasi Grafik & Pie Chart
     col_a, col_b = st.columns([2, 1])
     with col_a:
         st.markdown("**Tren Harga Transaksi Terakhir**")
@@ -208,7 +191,6 @@ if menu == "Dashboard Utama":
 
     st.divider()
 
-    # 5. Tabel Data Terintegrasi
     st.markdown("### 📍 Detail Sebaran Realisasi Program")
     st.dataframe(
         df, 
@@ -225,7 +207,6 @@ if menu == "Dashboard Utama":
         }
     )
 
-    # 6. Penutup (Hanya muncul di Dashboard Utama)
     st.markdown("---")
     st.caption("© 2026 Dashboard Monitoring Nasional - Update Terakhir: 23 Maret 2026")
 
