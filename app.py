@@ -1,15 +1,41 @@
 import streamlit as st
-mode = st.sidebar.selectbox("Pilih Tampilan:", ["Mockup/Demo", "Aplikasi Asli"])
-
-if mode == "Mockup/Demo":
-    st.title("Mockup Data Meal")
-    st.info("Anda sedang melihat versi Mockup.")
-    # Tampilkan gambar atau tabel statis di sini
-    st.image("https://via.placeholder.com/800x400.png?text=Screenshot+Aplikasi+Kamu") 
-    st.stop() # Ini penting! Untuk menghentikan program agar tidak membaca kode di bawahnya.
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
+mode = st.sidebar.selectbox("Pilih Tampilan:", ["Mockup/Demo", "Aplikasi Asli"])
+
+if mode == "Mockup/Demo":
+    st.set_page_config(layout="wide", page_title="Mockup MBG SENTRA")
+    
+    # Header Mockup
+    st.title("🥘 Mockup Dashboard MBG SENTRA")
+    st.info("💡 Anda sedang berada di mode **Preview/Mockup**. Pindah ke 'Aplikasi Asli' di sidebar untuk sistem real-time.")
+    
+    # Baris pertama: Metric
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Target Penerima", "45.2 Juta Siswa", "Nasional")
+    m2.metric("Anggaran Terkelola", "Rp 12.5 Triliun", "Stabil")
+    m3.metric("Skor Transparansi", "98%", "A+")
+    
+    # Baris kedua: Tabel Dummy & Grafik Simpel
+    col_a, col_b = st.columns([2, 1])
+    with col_a:
+        st.subheader("📍 Realisasi per Wilayah (Dummy)")
+        mock_data = pd.DataFrame({
+            "Wilayah": ["Bengkulu", "DKI Jakarta", "Jawa Barat", "Jawa Timur"],
+            "Realisasi (%)": [91.0, 85.2, 78.9, 80.1],
+            "Status": ["Optimal", "Optimal", "Waspada", "Waspada"]
+        })
+        st.table(mock_data)
+    
+    with col_b:
+        st.subheader("📊 Komposisi Gizi")
+        gizi_data = pd.DataFrame([30, 40, 20, 10], index=["Karbo", "Protein", "Vitamin", "Susu"])
+        st.bar_chart(gizi_data)
+
+    st.warning("⚠️ Untuk melihat Dashboard Monitoring Nasional yang lengkap dengan fitur Anomali, silakan pilih 'Aplikasi Asli' pada menu di samping kiri.")
+    
+    st.stop()
 import random
 # Pustaka Pillow untuk memproses gambar
 from PIL import Image
