@@ -1,4 +1,12 @@
 import streamlit as st
+mode = st.sidebar.selectbox("Pilih Tampilan:", ["Mockup/Demo", "Aplikasi Asli"])
+
+if mode == "Mockup/Demo":
+    st.title("Mockup Data Meal")
+    st.info("Anda sedang melihat versi Mockup.")
+    # Tampilkan gambar atau tabel statis di sini
+    st.image("https://via.placeholder.com/800x400.png?text=Screenshot+Aplikasi+Kamu") 
+    st.stop() # Ini penting! Untuk menghentikan program agar tidak membaca kode di bawahnya.
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
